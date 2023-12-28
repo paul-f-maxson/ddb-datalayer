@@ -1,0 +1,7 @@
+{
+  "name": "@ddb-datalayer/config",
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "typescript": "^5.3.3"
+  }
+}

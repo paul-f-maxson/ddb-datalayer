@@ -1,0 +1,36 @@
+{
+  "name": "ddb-datalayer",
+  "packageManager": "yarn@4.0.2",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "yarn run eslint --fix",
+    "format": "yarn run prettier --ignore-unknown --list-different --write"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-functional": "^6.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "husky": "^8.0.3",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "prettier": {
+    "printWidth": 60,
+    "trailingComma": "es5",
+    "semi": false
+  },
+  "lint-staged": {
+    "**/*": [
+      "yarn run lint",
+      "yarn run format"
+    ]
+  }
+}
