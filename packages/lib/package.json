@@ -1,7 +1,32 @@
 {
   "name": "@ddb-datalayer/lib",
+  "type": "module",
   "packageManager": "yarn@4.0.2",
+  "scripts": {
+    "lint": "eslint --no-warn-ignored --fix",
+    "format": "prettier --ignore-unknown --list-different --write"
+  },
   "dependencies": {
+    "@ddb-datalayer/config": "workspace:^",
+    "type-fest": "^4.9.0",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.56.0",
+    "@types/eslint": "^8",
+    "@types/eslint__js": "^8",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-functional": "^6.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "^3.1.1"
+  },
+  "lint-staged": {
+    "**/*": [
+      "yarn run lint",
+      "yarn run format"
+    ]
   }
 }

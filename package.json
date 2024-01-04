@@ -7,13 +7,13 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "lint": "yarn run eslint --fix",
-    "format": "yarn run prettier --ignore-unknown --list-different --write"
+    "lint": "eslint --no-warn-ignored --fix",
+    "format": "prettier --ignore-unknown --list-different --write"
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
-    "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@typescript-eslint/parser": "^6.16.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-functional": "^6.0.0",
@@ -32,5 +32,8 @@
       "yarn run lint",
       "yarn run format"
     ]
+  },
+  "dependencies": {
+    "@ddb-datalayer/config": "workspace:^"
   }
 }
