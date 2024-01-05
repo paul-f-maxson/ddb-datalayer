@@ -1,16 +1,23 @@
-export const defineEntity = <
-  StaticAttributes extends Record<string, string | number>,
-  CalculatedAttributes extends Record<
-    string,
-    string | number
-  >,
->(makeKeys: {
+export type MakeKeys<
+  SuppliedAttributes extends Record<string, string>,
+  CalculatedAttributes extends Record<string, string>,
+> = {
   [k in keyof CalculatedAttributes]: (
-    staticAttributes: StaticAttributes
+    staticAttributes: SuppliedAttributes
   ) => CalculatedAttributes[k]
-}) => ({
-  create: (staticAttributes: StaticAttributes) => ({
-    ...staticAttributes,
+}
+
+export const defineEntity = <
+  SuppliedAttributes extends Record<string, string>,
+  CalculatedAttributes extends Record<string, string>,
+>(
+  makeKeys: MakeKeys<
+    SuppliedAttributes,
+    CalculatedAttributes
+  >
+) => ({
+  create: (suppliedAttributes: SuppliedAttributes) => ({
+    ...suppliedAttributes,
     ...Object.entries(
       makeKeys
     ).reduce<CalculatedAttributes>(
@@ -20,7 +27,7 @@ export const defineEntity = <
       ) => ({
         ...calculatedAttributes,
         [calculatedAttribute]: buildCalculatedAttribute(
-          staticAttributes
+          suppliedAttributes
         ),
       }),
       {} as CalculatedAttributes
