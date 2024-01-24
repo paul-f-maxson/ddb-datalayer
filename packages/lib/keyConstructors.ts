@@ -3,11 +3,13 @@ import { MergeExclusive } from "type-fest"
 export const keyedValue =
   <
     Key extends string,
+    Sep extends string,
+    KeyAlias extends string,
     Rec extends Record<Key, string>,
   >(options: {
     key: Key
-    sep?: string
-    keyAlias?: string
+    sep?: Sep
+    keyAlias?: KeyAlias
   }) =>
   (record: Rec) =>
     `${

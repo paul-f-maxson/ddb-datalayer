@@ -16,11 +16,13 @@ export const defineEntity = <
     CalculatedAttributes
   >
 ) => ({
-  create: (suppliedAttributes: SuppliedAttributes) => ({
+  generateAttributes: (
+    suppliedAttributes: SuppliedAttributes
+  ) => ({
     ...suppliedAttributes,
-    ...Object.entries(
-      makeKeys
-    ).reduce<CalculatedAttributes>(
+    ...Object.entries<
+      (staticAttributes: SuppliedAttributes) => unknown
+    >(makeKeys).reduce<CalculatedAttributes>(
       (
         calculatedAttributes,
         [calculatedAttribute, buildCalculatedAttribute]
@@ -32,5 +34,8 @@ export const defineEntity = <
       }),
       {} as CalculatedAttributes
     ),
+  }),
+  defineQuery: () => ({
+    generateAttributes: () => ({}),
   }),
 })
