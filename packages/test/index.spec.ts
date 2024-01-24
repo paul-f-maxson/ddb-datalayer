@@ -49,17 +49,31 @@ it("works", () => {
     UserCalculatedAttributes
   >({ pk, sk, gsi1pk, gsi1sk })
 
-  const u1 = User.create({
+  const userDataById = User.defineQuery({
+    pk: "pk",
+    sk: "sk",
+  })
+
+  const usersByFavClr = User.defineQuery({
+    pk: "gsi1pk",
+    sk: "gsi1sk",
+  })
+
+  const u1 = User.generateAttributes({
     userId: "12345",
     name: "John Doe",
     favoriteColor: "red",
   })
 
-  const u2 = User.create({
+  const u2 = User.generateAttributes({
     userId: "67890",
     name: "Jane Doe",
     favoriteColor: "red",
   })
+
+  const q1 = userDataById({ userId: "12345" })
+
+  const q2 = usersByFavClr({ favoriteColor: "red" })
 
   expect(u1).toEqual({
     userId: "12345",
@@ -79,5 +93,15 @@ it("works", () => {
     sk: "data",
     gsi1pk: "col=colors|favclr=red",
     gsi1sk: "uid=67890",
+  })
+
+  expect(q1).toEqual({
+    pk: "col=usr|uid=12345|onr==12345",
+    sk: { exact: "data" },
+  })
+
+  expect(q2).toEqual({
+    pk: "col=colors|favclr=red",
+    sk: {},
   })
 })
